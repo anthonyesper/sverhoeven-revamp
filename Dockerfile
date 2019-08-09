@@ -212,6 +212,11 @@ RUN cd / && git clone --recursive https://github.com/CartoDB/observatory-extensi
   git checkout $OBSERVATORY_VERSION && \
   PGUSER=postgres make deploy
 
+#Setup SSL Folder and Copy Keys
+RUN mkdir /.ssh
+ADD ./config/sample.domain.com.cert /.ssh/sample.domain.com.cert
+ADD ./config/sample.domain.com.key /.ssh/sample.domain.com.key
+
 # Copy confs
 ADD ./config/CartoDB-dev.js \
       /CartoDB-SQL-API/config/environments/development.js

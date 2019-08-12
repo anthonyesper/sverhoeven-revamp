@@ -39,7 +39,7 @@ bundle exec rake carto:api_key:create_default
 USE_HTTPS=${CARTO_USE_HTTPS:-true}
 
 if [[ $USE_HTTPS = 'true' ]]; then
-    CARTO_DB_INIT_FILE="/carto/cartodb/config/initializers/carto_db.rb"
+    CARTO_DB_INIT_FILE="/cartodb/config/initializers/carto_db.rb"
     echo "Changing the self.use_https? method in $CARTO_DB_INIT_FILE to return true, so https works in dev."
     sed -i "/def self.use_https\?/,/end/c\  def self.use_https?\n    true\n  end" $CARTO_DB_INIT_FILE
 else

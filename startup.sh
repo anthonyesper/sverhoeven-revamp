@@ -31,5 +31,20 @@ script/sync_tables_trigger.sh &
 echo 'delete from api_keys' | psql -U postgres -t carto_db_development
 bundle exec rake carto:api_key:create_default
 
+#FORCING HTTPS IN DEV 
+
+# This section is a hack to make https stay on without changing the rails env
+# to staging or production, which is otherwise required to get it to stop
+# constructing http based urls.
+USE_HTTPS=${CARTO_USE_HTTPS:-true}
+
+if [[ $USE_HTTPS = 'true' ]]; then
+    CARTO_DB_INIT_FILE="/carto/cartodb/config/initializers/carto_db.rb"
+    echo "Changing the self.use_https? method in $CARTO_DB_INIT_FILE to return true, so https works in dev."
+    sed -i "/def self.use_https\?/,/end/c\  def self.use_https?\n    true\n  end" $CARTO_DB_INIT_FILE
+else
+    echo "CARTO_USE_HTTPS was not 'true'"
+fi
+
 # bundle exec rake carto:api_key:create_default
 bundle exec thin start --threaded -p 3000 --threadpool-size 5

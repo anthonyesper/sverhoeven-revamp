@@ -33,31 +33,31 @@ defaults: &defaults
   tiler:
     filter: 'mapnik'
     internal:
-      protocol:      'http'
+      protocol:      'https'
       domain:        'cartodb.localhost'
-      port:          '80'
+      port:          '443'
       verifycert:     false
     private:
-      protocol:      'http'
+      protocol:      'https'
       domain:        'cartodb.localhost'
-      port:          '80'
+      port:          '443'
       verifycert:     false
     public:
-      protocol:      'http'
+      protocol:      'https'
       domain:        'cartodb.localhost'
-      port:          '80'
+      port:          '443'
       verifycert:     false
   sql_api:
     private:
-      protocol:   'http'
+      protocol:   'https'
       domain:     'cartodb.localhost'
       endpoint:   '/api/v2/sql'
-      port:       80
+      port:       '443'
     public:
-      protocol:   'http'
+      protocol:   'https'
       domain:     'cartodb.localhost'
       endpoint:   '/api/v2/sql'
-      port:       80
+      port:       '443'
   api_requests_service_url: ''
   developers_host:    'http://developers.cartodb.localhost:3000'
   google_analytics:

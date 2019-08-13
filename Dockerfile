@@ -220,8 +220,8 @@ ADD ./config/sample.domain.com.cert /.ssh/sample.domain.com.cert
 ADD ./config/sample.domain.com.key /.ssh/sample.domain.com.key
 
 #Fix Versions of Extension
-sed -i 's/0\.30\.0/0.29.0/g' /cartodb/app/models/user/db_service.rb
-sed -i 's/0\.30\.0/0.29.0/g' /cartodb/app/controllers/home_controller.rb
+RUN sed -i 's/0\.30\.0/0.29.0/g' /cartodb/app/models/user/db_service.rb
+RUN sed -i 's/0\.30\.0/0.29.0/g' /cartodb/app/controllers/home_controller.rb
 
 # Copy confs
 ADD ./config/CartoDB-dev.js \

@@ -297,11 +297,11 @@ defaults: &defaults
         debug:              false
         visible:            true
         tiler_domain:       "cartodb.localhost"
-        tiler_port:         "80"
-        tiler_protocol:     "http"
+        tiler_port:         "443"
+        tiler_protocol:     "https"
         sql_domain:         "cartodb.localhost"
-        sql_port:           "80"
-        sql_protocol:       "http"
+        sql_port:           "443"
+        sql_protocol:       "https"
         extra_params:       { cache_policy: 'persist' }
         tile_style_history: []
         style_version:      "2.1.1"

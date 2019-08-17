@@ -33,9 +33,10 @@ defaults: &defaults
   tiler:
     filter: 'mapnik'
     internal:
-      protocol:      'https'
-      domain:        'cartodb.localhost'
-      port:          '443'
+      protocol:      'http'
+      domain:        ''
+      port:          '8181'
+      host:          '0.0.0.0'
       verifycert:     false
     private:
       protocol:      'https'

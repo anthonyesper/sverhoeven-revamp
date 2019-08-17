@@ -214,11 +214,6 @@ RUN cd / && git clone --recursive https://github.com/CartoDB/observatory-extensi
   git checkout $OBSERVATORY_VERSION && \
   PGUSER=postgres make deploy
 
-#Setup SSL Folder and Copy Keys
-RUN mkdir /.ssh
-ADD ./config/sample.domain.com.cert /.ssh/sample.domain.com.cert
-ADD ./config/sample.domain.com.key /.ssh/sample.domain.com.key
-
 # Copy confs
 ADD ./config/CartoDB-dev.js \
       /CartoDB-SQL-API/config/environments/development.js
@@ -245,6 +240,11 @@ RUN mkdir -p /cartodb/log && touch /cartodb/log/users_modifications && \
 	service postgresql stop && service redis-server stop && \
     chmod +x /cartodb/script/fill_geocoder.sh && \
     chmod +x /cartodb/script/sync_tables_trigger.sh
+
+#Setup for HTTPS
+
+RUN sed -i "/def self.use_https\?/,/end/c\  def self.use_https?\n    true\n  end" /cartodb/config/initializers/carto_db.rb
+RUN sed -i 's|http://|https://|g' /Windshaft-cartodb/config/environments/development.js
 
 EXPOSE 80
 

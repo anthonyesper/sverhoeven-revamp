@@ -4,11 +4,6 @@ export CARTO_HOSTNAME=${CARTO_HOSTNAME:=$HOSTNAME}
 
 perl -pi -e 's/cartodb\.localhost/$ENV{"CARTO_HOSTNAME"}/g' /etc/nginx/nginx.conf /cartodb/config/app_config.yml /Windshaft-cartodb/config/environments/development.js
 
-#FORCING HTTPS IN DEV 
-echo "Changing the self.use_https? method in /cartodb/config/initializers/carto_db.rb to return true, so https works in dev."
-sed -i "/def self.use_https\?/,/end/c\  def self.use_https?\n    true\n  end" /cartodb/config/initializers/carto_db.rb
-sed -i 's|http://|https://|g' /Windshaft-cartodb/config/environments/development.js
-
 PGDATA=/var/lib/postgresql
 if [ "$(stat -c %U $PGDATA)" != "postgres" ]; then
 (>&2 echo "${PGDATA} not owned by postgres, updating permissions")

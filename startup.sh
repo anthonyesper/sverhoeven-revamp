@@ -3,6 +3,8 @@
 export CARTO_HOSTNAME=${CARTO_HOSTNAME:=$HOSTNAME}
 
 perl -pi -e 's/cartodb\.localhost/$ENV{"CARTO_HOSTNAME"}/g' /etc/nginx/nginx.conf /cartodb/config/app_config.yml /Windshaft-cartodb/config/environments/development.js
+sed -i 's/examplebucket/'"$examplebucket"'/g' /cartodb/config/app_config.yml
+sed -i 's/exampleregion/'"$exampleregion"'/g' /cartodb/config/app_config.yml
 
 PGDATA=/var/lib/postgresql
 if [ "$(stat -c %U $PGDATA)" != "postgres" ]; then

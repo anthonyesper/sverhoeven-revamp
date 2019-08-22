@@ -31,9 +31,6 @@ ENV DATAERVICESAPI_VERSION=master
 #ENV OBSERVATORY_VERSION=1.9.0
 ENV OBSERVATORY_VERSION=master
 
-ARG examplebucket
-ARG exampleregion
-
 RUN useradd -m -d /home/cartodb -s /bin/bash cartodb && \
   apt-get install -y -q \
     build-essential \
@@ -248,10 +245,6 @@ RUN mkdir -p /cartodb/log && touch /cartodb/log/users_modifications && \
 
 RUN sed -i "/def self.use_https\?/,/end/c\  def self.use_https?\n    true\n  end" /cartodb/config/initializers/carto_db.rb
 RUN sed -i 's|http://|https://|g' /Windshaft-cartodb/config/environments/development.js
-
-#Setup S3 
-RUN sed -i 's/examplebucket/'"$examplebucket"'/g' /cartodb/config/app_config.yml
-RUN sed -i 's/exampleregion/'"$exampleregion"'/g' /cartodb/config/app_config.yml
 
 EXPOSE 80
 

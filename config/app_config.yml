@@ -315,11 +315,11 @@ defaults: &defaults
   cartodb_central_domain_name: 'cartodb.localhost'
   aws:
     s3:
-      access_key_id: "test"
-      secret_access_key: "test"
-      region: ''
+      access_key_id: 
+      secret_access_key: 
+      region: 'exampleregion'
   assets:
-    s3_bucket_name: "tests"
+    s3_bucket_name: "examplebucket"
     max_file_size: 5242880 # 5.megabytes
     region: ''
     # Example for configuring organization assets.
